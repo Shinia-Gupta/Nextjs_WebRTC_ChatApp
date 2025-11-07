@@ -1,5 +1,4 @@
 import clientPromise from "@/lib/db";
-import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 
 
@@ -18,7 +17,7 @@ export async function POST(req:Request){
             return NextResponse.json({error:"User already exists"},{status:400})
         }
 
-        const hashedpassword=await bcrypt.hash(password,10);
+        const hashedpassword=await hashPassword(password);
         await db.collection("users").insertOne({
             name,email,password:hashedpassword
         })

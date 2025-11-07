@@ -1,6 +1,5 @@
-import { showToast } from "@/components/toasts";
-import { auth, signOut } from "@/lib/auth";
-import { handleSignout } from "../actions/authActions";
+"use server"
+import { auth } from "@/lib/auth";
 import Signout from "./Signout";
 
 export default async function DashboardPage() {

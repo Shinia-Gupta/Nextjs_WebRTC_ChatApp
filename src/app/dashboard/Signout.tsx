@@ -1,7 +1,6 @@
 "use client"
 import { showToast } from "@/components/toasts";
-import { auth, signOut } from "@/lib/auth";
-import { handleSignout } from "../actions/authActions";
+import { handleSignout } from "../actions/authActions.node";
 import { useTransition } from "react";
 
 export default function Signout() {

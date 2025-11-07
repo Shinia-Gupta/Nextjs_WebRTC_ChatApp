@@ -1,14 +1,13 @@
 import type { NextAuthConfig } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
 import Google from "next-auth/providers/google";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 import clientPromise from "./db";
-import bcrypt from "bcryptjs";
 
 export const authConfig: NextAuthConfig = {
   adapter: MongoDBAdapter(clientPromise),
   providers: [
-    Credentials({
+    CredentialsProvider({   //CredentialsProvider
       name: "Credentials",
       credentials: {
         email: { label: "Email", type: "email" },
@@ -26,7 +25,7 @@ export const authConfig: NextAuthConfig = {
 
         if (!user || !user.password) throw new Error("User not found");
 
-        const isValid = await bcrypt.compare(password, user.password);
+        const isValid = await verifyPassword(password, user.password);
         if (!isValid) throw new Error("Invalid password");
 
         return {
